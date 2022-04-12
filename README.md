@@ -1,5 +1,5 @@
 # Office-Auto-Save
-This is a simple backgroud app for Windows that checks for edits made to Office documents in realtime and saves the document for you. 
+This is a simple backgroud app for Windows that checks for edits made to Office documents (Word, Excel, and PowerPoint) in realtime and saves the document for you. 
 I made this because I found it very annoying that Microsoft only allowed AutoSave on files stored on OneDrive. 
 The saving doesn't interfere with the mouse or keyboard so it leaves you free to continue editing.
 
