@@ -19,6 +19,8 @@ a = Analysis(['OfficeAutoSave.py'],
              noarchive=False)
 
 a.datas += [('icon.png','H:\\nathan\\Projects\\Programming\\Python\\WordAutoSave\\icon.png', "DATA")]
+a.datas += [('icon.ico','H:\\nathan\\Projects\\Programming\\Python\\WordAutoSave\\icon.ico', "DATA")]
+
 pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
 splash = Splash('splash.png',
@@ -33,8 +35,8 @@ exe = EXE(pyz,
           a.binaries,
           a.zipfiles,
           a.datas, 
-          splash, 
-          splash.binaries,
+          #splash, 
+          #splash.binaries,
           [],
           name='Office Auto Save',
           debug=False,

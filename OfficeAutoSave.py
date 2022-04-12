@@ -62,19 +62,7 @@ word_checker_thread = threading.Thread(target=office_checker)
 delta_time = 0;
 save_timer = 0;
 reset_timer = 0;
-final = False;
 has_edited = False;
-
-def save_keyboard_shortcut():
-    global save_timer, final
-    keyboard = Controller()
-    keyboard.press(Key.ctrl)
-    keyboard.press('s')
-    keyboard.release(Key.ctrl)
-    keyboard.release('s')
-    save_timer = 0
-    print("Saved")
-    final = True;
 
 
 def get_child_window(parent, class_name):
@@ -102,7 +90,7 @@ def control_click(x, y, handle, button='left'):
         PostMessage(handle, WM_RBUTTONUP, 0, l_param)
 
 def save_button_click():
-    global save_timer, final, window_handle
+    global save_timer, window_handle
     for handle in get_child_window(window_handle, "NetUIHWND"):
         control_click(136, 18, handle, 'left')
 
@@ -117,14 +105,13 @@ def save_loop():
             save_timer += delta_time;
 
         if(current_office_window_still_open()):
-            #print(save_timer, final);
-            if(save_timer > 0.5 and final == False and has_edited):
+            if(save_timer > 0.2 and has_edited):
                 save_button_click()
                 has_edited = False;
                 save_timer = 0
         else:
             reset_timer += delta_time;
-            if(reset_timer > 1):
+            if(reset_timer > 5):
                 reset_timer = 0
                 save_timer = 0
                 saving = False
@@ -137,17 +124,20 @@ saving_thread = threading.Thread(target=save_loop)
 
 #main thread side
 def on_press(key):
-    global save_timer, final, has_edited
+    global save_timer, has_edited, timer_pause
     save_timer = 0;
-    final = False;
+    timer_pause = True
     has_edited = True;
 
 def on_click(x, y, button, pressed):
     global timer_pause, has_edited
-    timer_pause = pressed;
     if(not pressed):
         has_edited = True;
 
+def on_move(x, y):
+    global timer_pause, save_timer
+    save_timer = 0;
+    timer_pause = False
 
 def quit_app():
     global tray_icon
@@ -178,12 +168,13 @@ if __name__ == '__main__':
     "Auto Save",
     "Office Auto Save is running in the background. Right click the icon in the system tray to quit.",
     duration = 6,
-    icon_path = "icon.ico",
+    icon_path = resource_path("icon.ico"),
     threaded = True,
     )
 
     keyboard.Listener(on_press=on_press).start()
     mouse.Listener(on_click=on_click).start()
+    mouse.Listener(on_move=on_move).start()
     word_checker_thread.run()
 
     
