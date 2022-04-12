@@ -127,10 +127,18 @@ def on_press(key):
     timer_pause = True
     has_edited = True;
 
+def magnitude(x, y):
+    return (x**2 + y**2)**0.5
+
+pos_on_down = (0, 0)
 def on_click(x, y, button, pressed):
-    global timer_pause, has_edited
-    if(not pressed):
-        has_edited = True;
+    global timer_pause, has_edited, pos_on_down
+    if not pressed:
+        if magnitude(pos_on_down[0] - x, pos_on_down[1] - y) > 30:
+            has_edited = True;
+    else:
+        pos_on_down = (x, y)
+
 
 def on_move(x, y):
     global timer_pause, save_timer
