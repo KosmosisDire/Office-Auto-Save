@@ -1,5 +1,3 @@
-from asyncio.windows_events import NULL
-from email.policy import default
 import os
 import sys
 from win32gui import GetWindowText, GetForegroundWindow, PostMessage, GetWindowRect, EnumChildWindows, GetClassName, GetParent
