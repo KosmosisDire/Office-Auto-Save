@@ -3,6 +3,9 @@ This is a simple backgroud app for Windows that checks for edits made to Office 
 I made this because I found it very annoying that Microsoft only allowed AutoSave on files stored on OneDrive. 
 The saving doesn't interfere with the mouse or keyboard so it leaves you free to continue editing.
 
+### Disclaimer
+I have not tested this on different screen resolutions, nor with large files. There may be problems!
+
 ## Installation
 Simply download the installer from the releases page here on github.
 
@@ -30,4 +33,7 @@ pip install pillow
 pip install pystray
 pip install win10toast
 ```
+
+### Pull Requests are Welcome
+If you want to contribute to this little project, feel free to submit and issue or PR :)
 
