@@ -33,7 +33,12 @@ pip install pillow
 pip install pystray
 pip install win10toast
 ```
+As well as 
+```
+pip install pyinstaller
+```
+If you plan to build it.
 
 ### Pull Requests are Welcome
-If you want to contribute to this little project, feel free to submit and issue or PR :)
+If you want to contribute to this little project, feel free to submit an issue or PR :)
 
